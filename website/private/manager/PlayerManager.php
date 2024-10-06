@@ -8,7 +8,13 @@ class PlayerManager {
         $stmt->bindvalue(1, $teamId);
         $stmt->execute();
 
-        return $stmt->fetchall(PDO::FETCH_OBJ);
+        $playerData = $stmt->fetchall(PDO::FETCH_OBJ);
+        $players = array();
+        foreach($playerData as $player) {
+            $players[$player->position] = $player;
+        }
+
+        return $players;
     }
 
 }
